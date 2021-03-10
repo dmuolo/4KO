@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eb21ef7ee3db4f089b863af0b4694464" Name="Diagram1">
+        <EntityTypeShape EntityType="MovieStoreModel.Actor" Width="1.5" PointX="5.125" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.AspectRatio" Width="1.5" PointX="0.875" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Category" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Country" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Department" Width="1.5" PointX="6.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Director" Width="1.5" PointX="5.125" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Employee" Width="1.5" PointX="8" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Genre" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.Language" Width="1.5" PointX="0.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.MovieActor" Width="1.5" PointX="5.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.MovieRating" Width="1.5" PointX="2.375" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.MovieStatus" Width="1.5" PointX="4.125" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieStoreModel.MovieTitle" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieActor_Actor" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_AspectRatio" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_DirectorID" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_Employee_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_Genres" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieActor_MovieTitle" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_MovieRating" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_MovieStatus" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
