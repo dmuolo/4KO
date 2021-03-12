@@ -206,7 +206,7 @@
                                         <div class="col-md-6 col-lg-3">
                                             <h5>User</h5>
                                             <ul class="list-unstyled mb-3">
-                                                <li class="nav-item"><a href=""@Url.Action("Register", "Home")" class="nav-link">Register / login</a></li>
+                                                <li class="nav-item"><a href="" @Url.Action("Register", "Home") " class="nav-link">Register / login</a></li>
                                                 <li class="nav-item"><a href="@Url.Action("Customer-Orders", "Home")" class="nav-link">Orders history</a></li>
                                                 <li class="nav-item"><a href="@Url.Action("Customer-Order", "Home")" class="nav-link">Order history detail</a></li>
                                                 <li class="nav-item"><a href="@Url.Action("Customer-Wishlist", "Home")" class="nav-link">Wishlist</a></li>
@@ -252,16 +252,29 @@
             <div class="container">
                 <form role="search" class="ml-auto">
                     <div class="input-group">
-                        <input type="text" placeholder="Search" class="form-control">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                        </div>
+                        @using (Html.BeginForm("Index", "MovieTitles", FormMethod.Get))
+                        {
+                            <div class="col-md-4">
+                                @Html.TextBox("SearchString", ViewBag.SearchString as string, new { @placeholder = "Search by Title" })
+                            </div>
+                            <div class="col-md-1 text-center">
+                                <input type="submit" value="See Results" class="btn btn-primary" />
+                            </div>
+                            <div class="col-md-1 text-center">
+                                @Html.ActionLink("Reset", "Index", "MovieTitles", null, new { @class = "btn bt-primary" })
+                            </div>
+                        }
+                        @*<input type="text" placeholder="Search" class="form-control">*@
+                        @*<div class="input-group-append">
+                            <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>*@
                     </div>
                 </form>
             </div>
         </div>
     </header>
+
     @RenderBody()
+
     <!--
     *** FOOTER ***
     _________________________________________________________
