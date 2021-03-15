@@ -21,9 +21,9 @@
                 </div>
                 <div class="col-lg-3">
                     <!--
-    *** MENUS AND FILTERS ***
-    _________________________________________________________
-    -->
+                    *** MENUS AND FILTERS ***
+                    _________________________________________________________
+                    -->
                     <div class="card sidebar-menu mb-4">
                         <div class="card-header">
                             <h3 class="h4 card-title">Genre</h3>
@@ -52,7 +52,7 @@
                             <form>
                                 <div class="form-group">
                                     <div class="checkbox">
-                                            <input type="checkbox"> 4K
+                                        <input type="checkbox"> 4K
                                         <label>
                                         </label>
                                     </div>
@@ -80,7 +80,7 @@
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"><span class="colour white"></span> G 
+                                            <input type="checkbox"><span class="colour white"></span> G
                                         </label>
                                     </div>
                                     <div class="checkbox">
@@ -145,6 +145,15 @@
                                         </p>
                                         <p class="buttons"><a href="@Url.Action("Details", new { id = item.MovieID } )" class="btn btn-outline-secondary">View detail</a><a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
                                     </div>
+                                    @*<p class="text-center buttons">
+                                        @using (Html.BeginForm("AddToCart", "MovieTitles", new { movieID = Model.MovieID }, FormMethod.Post))
+                                        {
+                                            @Html.HiddenFor(x => x.MovieID)
+
+                                            @Html.TextBox("Qty", 1, new { @class = "form-control text-center", style = "max-width:75px;display:inline;" })
+                                            <input type="submit" value="Add to Cart" class="btn btn-primary" name="qty" />
+                                        }
+                                    </p>*@
                                     <!-- /.text-->
                                 </div>
                                 <!-- /.product            -->
