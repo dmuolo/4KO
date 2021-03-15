@@ -11,6 +11,7 @@ using System.Drawing;
 using StoreFront.UI.MVC.Utilities;
 using PagedList;
 using PagedList.Mvc;
+using StoreFront.UI.MVC.Models;
 
 namespace StoreFront.UI.MVC.Controllers
 {
@@ -218,5 +219,44 @@ namespace StoreFront.UI.MVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #region AddToCart()
+        public ActionResult AddToCart(int qty, int movieID)
+        {
+            Dictionary<int, CartItemViewModel> shoppingCart = null;
+
+            if (Session["cart"] != null)
+            {
+                shoppingCart = (Dictionary<int, CartItemViewModel>)Session["cart"];
+            }
+            else
+            {
+                shoppingCart = new Dictionary<int, CartItemViewModel>();
+            }
+
+            MovieTitle product = db.MovieTitles.Where(m => m.MovieID == movieID).FirstOrDefault();
+
+            if (product == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                CartItemViewModel item = new CartItemViewModel(qty, product);
+
+                if (shoppingCart.ContainsKey(product.MovieID))
+                {
+                    shoppingCart[product.MovieID].Qty += qty;
+                }
+                else
+                {
+                    shoppingCart.Add(product.MovieID, item);
+                }
+
+                Session["cart"] = shoppingCart;
+            }
+            return RedirectToAction("Index", "ShoppingCart");
+        }
+        #endregion
     }
 }

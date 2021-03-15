@@ -1,0 +1,69 @@
+﻿@*@model IEnumerable<StoreFront.UI.MVC.Models.CartItemViewModel>*@
+@model Dictionary<int, StoreFront.UI.MVC.Models.CartItemViewModel>
+@{
+    ViewBag.Title = "Shopping Cart";
+    decimal? cartTotal = -;
+    int totalCountOfItems = 0;
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.ActionLink("Back to Shopping", "Index", "MovieTitles", null, new { @class = "btn btn-danger" })
+
+@if (ViewBag.Message != null)
+{
+    <h3 style="text-align:center; color:orange">@ViewBag.Message</h3>
+}
+
+else
+{
+    <table class="table">
+        <tr>
+            <th>Movie Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/Content/img/ProductImages/t_@item.Value.Product.Image" alt="movie cover" title="@item.Value.Product.MovieTitle1" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value.Product.MovieTitle1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value.Product.Price)
+                </td>
+                <td>
+                    @using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+                    {
+                        @Html.Hidden("movieID", item.Value.Product.MovieID)
+                        @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width:75px;display:inline;" })
+
+                        <input type="submit" value="Update Quantity" class="btn btn-primary" />
+                    }
+                    @{totalCountOfItems += item.Value.Qty;}
+                </td>
+                <td>
+                    @{
+                        decimal? lineTotal = item.Value.Product.Price * item.Value.Qty;
+                        cartTotal += lineTotal;
+                    }
+                    @string.Format($"{lineTotal:c}")
+                </td>
+                <td>
+                    @Html.ActionLink("Remove From Cart", "RemoveFromCart", new { id = item.Value.Product.MovieID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+        You have @totalCountOfItems @(totalCountOfItems > 1 ? "movies" : "movie") in your cart. Your total before taxes and shipping is @string.Format($"{cartTotal:c}")
+    </p>
+}

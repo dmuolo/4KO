@@ -1,54 +1,15 @@
 ﻿@model StoreFront.UI.MVC.Models.ContactViewModel
 
 @{
-    ViewBag.Title = "EmailConfirmation";
+    ViewBag.Title = "Email Confirmation";
 }
 
-<h2>EmailConfirmation</h2>
+<h2>Thank You</h2>
 
 <div>
-    <h4>ContactViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Subject)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Subject)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Message)
-        </dd>
-
-    </dl>
+    <p>
+        Thank you for your message, @Model.FirstName @Model.LastName: <br />"@Model.Message" <br />
+        I will respond to you at @Model.Email at my earliest convenience. <br />
+        - <em>4KO Support</em>
+    </p>
 </div>
