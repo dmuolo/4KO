@@ -195,6 +195,11 @@
     <Compile Include="Utilities\ImageService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\BluRay.jpg" />
+    <Content Include="Content\img\DVDs.jpg" />
+    <Content Include="Content\img\SliderBanner.png" />
+    <Content Include="Content\img\4ko Logo.png" />
+    <Content Include="Content\img\delphi.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
