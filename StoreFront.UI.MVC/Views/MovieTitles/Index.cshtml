@@ -14,16 +14,16 @@
                     <!-- breadcrumb-->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li aria-current="page" class="breadcrumb-item active">Shop</li>
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li aria-current="page" class="breadcrumb-item">Shop</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <!--
-                    *** MENUS AND FILTERS ***
-                    _________________________________________________________
-                    -->
+    *** MENUS AND FILTERS ***
+    _________________________________________________________
+    -->
                     <div class="card sidebar-menu mb-4">
                         <div class="card-header">
                             <h3 class="h4 card-title">Genre</h3>
@@ -52,18 +52,18 @@
                             <form>
                                 <div class="form-group">
                                     <div class="checkbox">
+                                            <input type="checkbox"> 4K
                                         <label>
-                                            <input type="checkbox"> 4K  (10)
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> Blu Ray  (12)
+                                            <input type="checkbox"> Blu Ray
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> DVD  (15)
+                                            <input type="checkbox"> DVD
                                         </label>
                                     </div>
                                 </div>
@@ -80,22 +80,22 @@
                                 <div class="form-group">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"><span class="colour white"></span> G (14)
+                                            <input type="checkbox"><span class="colour white"></span> G 
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"><span class="colour blue"></span> PG (10)
+                                            <input type="checkbox"><span class="colour blue"></span> PG
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"><span class="colour green"></span>  PG-13 (20)
+                                            <input type="checkbox"><span class="colour green"></span>  PG-13
                                         </label>
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"><span class="colour yellow"></span>  R (13)
+                                            <input type="checkbox"><span class="colour yellow"></span>  R
                                         </label>
                                     </div>
                                 </div>
@@ -103,6 +103,7 @@
                             </form>
                         </div>
                     </div>
+                    <div class="banner"><img src="~/Content/img/SliderBanner.png" alt="Logo Banner" class="img-fluid bannerPhoto"></div>
                     <!-- *** MENUS AND FILTERS END ***-->
                 </div>
                 <div class="col-lg-9">
@@ -133,16 +134,16 @@
                                 <div class="product">
                                     <div class="flip-container">
                                         <div class="flipper">
-                                            <div class="front"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/product1.jpg" alt="" class="img-fluid"></a></div>
-                                            <div class="back"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/product1_2.jpg" alt="" class="img-fluid"></a></div>
+                                            <div class="front"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
+                                            <div class="back"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
                                         </div>
-                                    </div><a href="@Url.Action("Details", "MovieTitles")" class="invisible"><img src="~/Content/img/product1.jpg" alt="" class="img-fluid"></a>
+                                    </div><a href="@Url.Action("Details", "MovieTitles")" class="invisible"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a>
                                     <div class="text">
                                         <h3><a href="@Url.Action("Details", "MovieTitles")">@Html.DisplayFor(modelItem => item.MovieTitle1)</a></h3>
                                         <p class="price">
                                             <del></del>@Html.DisplayFor(modelItem => item.Price)
                                         </p>
-                                        <p class="buttons"><a href="@Url.Action("Details", "MovieTitles")" class="btn btn-outline-secondary">View detail</a><a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
+                                        <p class="buttons"><a href="@Url.Action("Details", new { id = item.MovieID } )" class="btn btn-outline-secondary">View detail</a><a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
                                     </div>
                                     <!-- /.text-->
                                 </div>

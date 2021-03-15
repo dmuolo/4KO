@@ -197,6 +197,7 @@
   <ItemGroup>
     <Content Include="Content\img\BluRay.jpg" />
     <Content Include="Content\img\DVDs.jpg" />
+    <Content Include="Content\img\ProductImages\NoImage.png" />
     <Content Include="Content\img\SliderBanner.png" />
     <Content Include="Content\img\4ko Logo.png" />
     <Content Include="Content\img\delphi.jpg" />
@@ -278,7 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\img\ProductImages\" />
     <Folder Include="Views\Filters\" />
     <Folder Include="_Archive\" />
   </ItemGroup>

@@ -15,3 +15,8 @@ div.container img.d-md-inline-block {
     width: 12em;
     height: 36em;
 }
+
+.bannerPhoto {
+    width: 4em;
+    height: 4em;
+}
