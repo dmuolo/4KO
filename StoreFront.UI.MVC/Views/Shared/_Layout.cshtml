@@ -47,8 +47,6 @@
                             <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
                             <li class="list-inline-item"><a href="@Url.Action("Register", "Account")">Register</a></li>
                             <li class="list-inline-item"><a href="@Url.Action("Contact", "Home")">Contact</a></li>
-                            @* TODO Figure out recently viewed selection option? *@
-                            <li class="list-inline-item"><a href="#">Recently viewed</a></li>
                         </ul>
                     </div>
                 </div>
@@ -91,11 +89,13 @@
                 </div>
                 <div id="navigation" class="collapse navbar-collapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a href="@Url.Action("Index", "Home")" class="nav-link class=@if (ViewBag.Title == "4KO")
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Home")" class="nav-link class=@if (ViewBag.Title == "4KO")
                             {
                             @Html.Encode(Html.Raw("<html> active </html>"));
                         }
-                        ">Home</a></li>
+                        ">Home</a>
+                        </li>
                         <li id="shopNav" class="nav-item dropdown menu-large">
                             <a href="@Url.Action("Index", "MovieTitles")" class="nav-link class=@if (ViewBag.Title == "Shop")
                             {
@@ -106,7 +106,10 @@
                     </ul>
                     <div class="navbar-buttons d-flex justify-content-end">
                         <!-- /.nav-collapse-->
-                        <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
+                        @if (ViewBag.Title == "Shop")
+                        {
+                            <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
+                        }
 
                         @if (Session["cart"] != null)
                         {
@@ -138,26 +141,29 @@
         </nav>
         <div id="search" class="collapse">
             <div class="container">
-                <form role="search" class="ml-auto">
-                    <div class="input-group">
-                        @using (Html.BeginForm("Index", "MovieTitles", FormMethod.Get))
-                        {
-                            <div class="col-md-4">
-                                @Html.TextBox("SearchString", ViewBag.SearchString as string, new { @placeholder = "Search by Title" })
-                            </div>
-                            <div class="col-md-1 text-center">
-                                <input type="submit" value="See Results" class="btn btn-primary" />
-                            </div>
-                            <div class="col-md-1 text-center">
-                                @Html.ActionLink("Reset", "Index", "MovieTitles", null, new { @class = "btn bt-primary" })
-                            </div>
-                        }
-                        <input type="text" placeholder="Search" class="form-control">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                @if (ViewBag.Title == "Shop")
+                {
+                    <form role="search" class="ml-auto">
+                        <div class="input-group">
+                            @using (Html.BeginForm("Index", "MovieTitles", FormMethod.Get))
+                            {
+                                <div class="col-md-6">
+                                    @Html.TextBox("SearchString", ViewBag.SearchString as string, new { @placeholder = "Search by Title", @class = "form-control" })
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <input type="submit" value="See Results" class="btn btn-primary" />
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2">
+                                    @Html.ActionLink("Reset", "Index", "MovieTitles", null, new { @class = "btn" })
+                                </div>
+                            }
+                            @*<div class="input-group-append">
+                                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                            </div>*@
                         </div>
-                    </div>
-                </form>
+                    </form>
+                }
             </div>
         </div>
     </header>
