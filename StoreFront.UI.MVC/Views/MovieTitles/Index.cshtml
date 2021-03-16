@@ -3,7 +3,7 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Shop";
 }
 
 <div id="all">
@@ -109,20 +109,7 @@
                 <div class="col-lg-9">
                     <div class="box info-bar">
                         <div class="row">
-                            <div class="col-md-12 col-lg-4 products-showing">Showing <strong>12</strong> of <strong>25</strong> products</div>
-                            <div class="col-md-12 col-lg-7 products-number-sort">
-                                <form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
-                                    <div class="products-number"><strong>Show</strong><a href="#" class="btn btn-sm btn-primary">12</a><a href="#" class="btn btn-outline-secondary btn-sm">24</a><a href="#" class="btn btn-outline-secondary btn-sm">All</a><span>products</span></div>
-                                    <div class="products-sort-by mt-2 mt-lg-0">
-                                        <strong>Sort by</strong>
-                                        <select name="sort-by" class="form-control">
-                                            <option>Price</option>
-                                            <option>Name</option>
-                                            <option>Sales first</option>
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
+                            <div class="col-md-12 col-lg-4 products-showing">Showing <strong>@Model.Count</strong> of <strong>@Model.TotalItemCount</strong> movies</div>
                         </div>
                     </div>
                     <div class="row products">
@@ -134,48 +121,46 @@
                                 <div class="product">
                                     <div class="flip-container">
                                         <div class="flipper">
-                                            <div class="front"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
-                                            <div class="back"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
+                                            <div class="front"><a href="@Url.Action("Details", new { id = item.MovieID } )"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
+                                            <div class="back"><a href="@Url.Action("Details", new { id = item.MovieID } )"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
                                         </div>
-                                    </div><a href="@Url.Action("Details", "MovieTitles")" class="invisible"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a>
+                                    </div><a href="@Url.Action("Details", new { id = item.MovieID } )" class="invisible"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a>
                                     <div class="text">
-                                        <h3><a href="@Url.Action("Details", "MovieTitles")">@Html.DisplayFor(modelItem => item.MovieTitle1)</a></h3>
+                                        <h3><a href="@Url.Action("Details", new { id = item.MovieID } )">@Html.DisplayFor(modelItem => item.MovieTitle1)</a></h3>
                                         <p class="price">
                                             <del></del>@Html.DisplayFor(modelItem => item.Price)
                                         </p>
                                         <p class="buttons"><a href="@Url.Action("Details", new { id = item.MovieID } )" class="btn btn-outline-secondary">View detail</a><a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
                                     </div>
+                                    @if (item.Price <= 7.99m)
+                                    {
+                                        <div class="ribbon sale">
+                                            <div class="theribbon">Low Price</div>
+                                            <div class="ribbon-background"></div>
+                                        </div>
+                                    }
+                                    <!-- /.ribbon-->
+                                    @if (item.ReleaseYear > 2020)
+                                    {
+                                        <div class="ribbon new">
+                                            <div class="theribbon">NEW</div>
+                                            <div class="ribbon-background"></div>
+                                        </div>
+                                    }
                                     @*<p class="text-center buttons">
-                                        @using (Html.BeginForm("AddToCart", "MovieTitles", new { movieID = Model.MovieID }, FormMethod.Post))
-                                        {
-                                            @Html.HiddenFor(x => x.MovieID)
+            @using (Html.BeginForm("AddToCart", "MovieTitles", new { movieID = Model.MovieID }, FormMethod.Post))
+            {
+                @Html.HiddenFor(x => x.MovieID)
 
-                                            @Html.TextBox("Qty", 1, new { @class = "form-control text-center", style = "max-width:75px;display:inline;" })
-                                            <input type="submit" value="Add to Cart" class="btn btn-primary" name="qty" />
-                                        }
-                                    </p>*@
+                @Html.TextBox("Qty", 1, new { @class = "form-control text-center", style = "max-width:75px;display:inline;" })
+                <input type="submit" value="Add to Cart" class="btn btn-primary" name="qty" />
+            }
+        </p>*@
                                     <!-- /.text-->
                                 </div>
                                 <!-- /.product            -->
                             </div>
                         }
-                        @*  *@
-                        @*<!-- /.text-->
-                            <div class="ribbon sale">
-                                <div class="theribbon">SALE</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon-->
-                            <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon-->
-                            <div class="ribbon gift">
-                                <div class="theribbon">GIFT</div>
-                                <div class="ribbon-background"></div>
-                            </div>*@
-                        <!-- /.ribbon-->
                     </div>
 
                     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))

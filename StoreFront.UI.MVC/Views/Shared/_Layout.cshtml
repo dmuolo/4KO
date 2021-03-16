@@ -91,9 +91,17 @@
                 </div>
                 <div id="navigation" class="collapse navbar-collapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a href="@Url.Action("Index", "Home")" class="nav-link active">Home</a></li>
+                        <li class="nav-item"><a href="@Url.Action("Index", "Home")" class="nav-link class=@if (ViewBag.Title == "4KO")
+                            {
+                            @Html.Encode(Html.Raw("<html> active </html>"));
+                        }
+                        ">Home</a></li>
                         <li id="shopNav" class="nav-item dropdown menu-large">
-                            <a href="@Url.Action("Index", "MovieTitles")" class="nav-link">Shop</a>
+                            <a href="@Url.Action("Index", "MovieTitles")" class="nav-link class=@if (ViewBag.Title == "Shop")
+                            {
+                            @Html.Encode(Html.Raw("<html> active </html>"));
+                        }
+                        ">Shop</a>
                         </li>
                     </ul>
                     <div class="navbar-buttons d-flex justify-content-end">

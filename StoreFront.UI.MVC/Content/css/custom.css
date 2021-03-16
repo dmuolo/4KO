@@ -16,7 +16,19 @@ div.container img.d-md-inline-block {
     height: 36em;
 }
 
-.bannerPhoto {
-    width: 4em;
-    height: 4em;
+div.banner img.bannerPhoto {
+    width: 6em;
+    height: 3em;
+    font-size: 4em;
+}
+
+div.box p.addToCart {
+    padding-left: 4em;
+}
+
+.update {
+    
+}
+.fa-trash-o {
+    padding-left: 1.3em;
 }

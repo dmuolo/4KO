@@ -53,7 +53,7 @@
                                 </div>
                             }
                             <!-- /.ribbon-->
-                            @if (Model.ReleaseYear > 2020)
+                            @if (Model.ReleaseYear > 2019)
                             {
                                 <div class="ribbon new">
                                     <div class="theribbon">NEW</div>
@@ -71,7 +71,7 @@
                                     <p><em>@Html.DisplayFor(model => model.Description)</em></p>
                                 </blockquote>
                                 <p class="price">@Html.DisplayFor(model => model.Price)</p>
-                                <p class="text-center buttons">
+                                <p class="text-center buttons addToCart">
                                     @using (Html.BeginForm("AddToCart", "MovieTitles", new { movieID = Model.MovieID }, FormMethod.Post))
                                     {
                                         @Html.HiddenFor(x => x.MovieID)

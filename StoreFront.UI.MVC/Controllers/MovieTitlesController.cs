@@ -35,6 +35,21 @@ namespace StoreFront.UI.MVC.Controllers
             return View(movies.ToPagedList(page, pageSize));
         }
 
+        public ActionResult ByPrice(string searchString, int page = 1)
+        {
+            int pageSize = 6;
+            var movies = db.MovieTitles.OrderBy(m => m.Price).ToList();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(m => m.MovieTitle1.ToLower().Contains(searchString.ToLower())).ToList();
+            }
+
+            ViewBag.SearchString = searchString;
+
+            return View(movies.ToPagedList(page, pageSize));
+        }
+
         // GET: MovieTitles/Details/5
         public ActionResult Details(int? id)
         {
@@ -258,5 +273,6 @@ namespace StoreFront.UI.MVC.Controllers
             return RedirectToAction("Index", "ShoppingCart");
         }
         #endregion
+
     }
 }

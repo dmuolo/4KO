@@ -13,11 +13,6 @@
 
 else
 {
-    <p>
-        You have @totalCountOfItems @(totalCountOfItems > 1 || totalCountOfItems == 0 ? "movies" : "movie") in your cart. Your total before taxes and shipping is @string.Format($"{cartTotal:c}")
-    </p>
-}
-
     <div id="all">
         <div id="content">
             <div class="container">
@@ -35,7 +30,7 @@ else
                     </div>
                     <div id="basket" class="col-lg-9">
                         <div class="box">
-                            <form method="post" action="@Url.Action("Checkout1", "MovieTitles")">
+                            <form method="post" action="@Url.Action("UpdateCart", "ShoppingCart")">
                                 <h1>Shopping cart</h1>
                                 <p class="text-muted">You currently have @totalCountOfItems @(totalCountOfItems > 1 || totalCountOfItems == 0 ? "movies" : "movie") in your cart.</p>
                                 <div class="table-responsive">
@@ -48,19 +43,20 @@ else
                                                 <th colspan="2">Total</th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
                                             @foreach (var item in Model)
                                             {
                                                 <tr>
-                                                    <td><a href="#"><img src="~/Content/img/ProductImages/t_@item.Value.Product.Image" alt=""></a></td>
-                                                    <td><a href="@Url.Action("Details", "MovieTitles", new { id = item.Value.Product.MovieID } )">@item.Value.Product.MovieTitle1</a></td>
-                                                    <td>
+                                                    <td><a href="#"><img src="~/Content/img/ProductImages/t_@item.Value.Product.Image" alt="@item.Value.Product.MovieTitle1 Image"></a></td>
+                                                    <td><a href="@Url.Action("Details", "MovieTitles", new { id = item.Value.Product.MovieID })">@item.Value.Product.MovieTitle1</a></td>
+                                                    <td class="update">
                                                         @using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
                                                         {
                                                             @Html.Hidden("movieID", item.Value.Product.MovieID)
-                                                            @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width:75px;display:inline;" })
+                                                            @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width:50px;display:inline;" })
 
-                                                            <input type="submit" value="Update Quantity" class="btn btn-primary" />
+                                                            <input type="submit" value="Update" class="update btn btn-primary" />
                                                         }
                                                         @{totalCountOfItems += item.Value.Qty;}
                                                     </td>
@@ -74,80 +70,27 @@ else
                                                         }
                                                         @string.Format($"{lineTotal:c}")
                                                     </td>
-                                                    <td><a href="#">                    @Html.ActionLink("Remove From Cart", "RemoveFromCart", new { id = item.Value.Product.MovieID })<i class="fa fa-trash-o"></i></a></td>
+                                                    <td><i class="fa fa-trash-o"> @Html.ActionLink("Remove", "RemoveFromCart", new { id = item.Value.Product.MovieID })<br /></i></td>
                                                 </tr>
                                             }
-                                            <tfoot>
-                                                <tr>
-                                                    <th colspan="5">Total</th>
-                                                    <th colspan="2">@string.Format($"{cartTotal:c}")</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="5">Total</th>
+                                                <th colspan="2">@string.Format($"{cartTotal:c}")</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
                                 <!-- /.table-responsive-->
                                 <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
                                     <div class="left"><a href="@Url.Action("Index", "MovieTitles")" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Continue shopping</a></div>
                                     <div class="right">
-                                        <button class="btn btn-outline-secondary"><i class="fa fa-refresh"></i> Update cart</button>
                                         <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i></button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <!-- /.box-->
-                        <div class="row same-height-row">
-                            <div class="col-lg-3 col-md-6">
-                                <div class="box same-height">
-                                    <h3>You may also like these products</h3>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="product same-height">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/BluRay.jpg" alt="" class="img-fluid"></a></div>
-                                            <div class="back"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/DVDs.jpg" alt="" class="img-fluid"></a></div>
-                                        </div>
-                                    </div><a href="@Url.Action("Details", "MovieTitles")" class="invisible"><img src="~/Content/img/BluRay.jpg" alt="" class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3>Movie Title</h3>
-                                        <p class="price">Price</p>
-                                    </div>
-                                </div>
-                                <!-- /.product-->
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="product same-height">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/BluRay.jpg" alt="" class="img-fluid"></a></div>
-                                            <div class="back"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/DVDs.jpg" alt="" class="img-fluid"></a></div>
-                                        </div>
-                                    </div><a href="@Url.Action("Details", "MovieTitles")" class="invisible"><img src="~/Content/img/BluRay.jpg" alt="" class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3>Movie Title</h3>
-                                        <p class="price">Price</p>
-                                    </div>
-                                </div>
-                                <!-- /.product-->
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="product same-height">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/BluRay.jpg" alt="" class="img-fluid"></a></div>
-                                            <div class="back"><a href="@Url.Action("Details", "MovieTitles")"><img src="~/Content/img/DVDs.jpg" alt="" class="img-fluid"></a></div>
-                                        </div>
-                                    </div><a href="@Url.Action("Details", "MovieTitles")" class="invisible"><img src="~/Content/img/BluRay.jpg" alt="" class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3>Movie Title</h3>
-                                        <p class="price">Price</p>
-                                    </div>
-                                </div>
-                                <!-- /.product-->
-                            </div>
-                        </div>
                     </div>
                     <!-- /.col-lg-9-->
                     <div class="col-lg-3">
@@ -160,13 +103,13 @@ else
                                 <table class="table">
                                     <tbody>
                                         @*<tr>
-                                            <td>Order subtotal</td>
-                                            <th>@string.Format($"{cartTotal:c}")</th>
-                                        </tr>*@
+                                                <td>Order subtotal</td>
+                                                <th>@string.Format($"{cartTotal:c}")</th>
+                                            </tr>*@
                                         @*<tr>
-                                            <td>Shipping and handling</td>
-                                            <th>$10.00</th>
-                                        </tr>*@
+                                                <td>Shipping and handling</td>
+                                                <th>$10.00</th>
+                                            </tr>*@
                                         <tr>
                                             <td>Qty</td>
                                             <th>@totalCountOfItems @(totalCountOfItems > 1 || totalCountOfItems == 0 ? "movies" : "movie")</th>
@@ -185,3 +128,4 @@ else
             </div>
         </div>
     </div>
+}
