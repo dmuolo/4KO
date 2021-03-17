@@ -85,7 +85,7 @@ namespace StoreFront.UI.MVC.Controllers
             ViewBag.AspectRatioID = new SelectList(db.AspectRatios, "AspectRatioID", "AspectRatio1");
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Category1");
             ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1");
-            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "FirstName");
+            ViewBag.DirectorID = new SelectList(db.Directors, "DirectorID", "FullName");
             ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "GenreName");
             ViewBag.LanguageID = new SelectList(db.Languages, "LanguageID", "Language1");
             ViewBag.MovieRatingID = new SelectList(db.MovieRatings, "MovieRatingID", "MovieRating1");
