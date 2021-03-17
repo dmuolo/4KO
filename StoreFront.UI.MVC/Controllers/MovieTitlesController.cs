@@ -20,7 +20,7 @@ namespace StoreFront.UI.MVC.Controllers
         private MovieStoreEntities db = new MovieStoreEntities();
 
         // GET: MovieTitles
-        public ActionResult Index(string searchString, int page = 1)
+        public ActionResult Index(string searchString, int page = 1, int genreid = -1, int catid = -1)
         {
             int pageSize = 6;
             var movies = db.MovieTitles.OrderBy(m => m.MovieTitle1).ToList();
@@ -30,7 +30,21 @@ namespace StoreFront.UI.MVC.Controllers
                 movies = movies.Where(m => m.MovieTitle1.ToLower().Contains(searchString.ToLower())).ToList();
             }
 
+            if (genreid != -1)
+            {
+                movies = movies.Where(m => m.GenreID == genreid).ToList();
+            }
+
+            if (catid != -1)
+            {
+                movies = movies.Where(m => m.CategoryID == catid).ToList();
+            }
+
             ViewBag.SearchString = searchString;
+
+            ViewBag.GenreID = genreid;
+
+            ViewBag.CategoryID = catid;
 
             return View(movies.ToPagedList(page, pageSize));
         }

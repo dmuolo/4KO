@@ -72,25 +72,30 @@
                                     <p><em>@Html.DisplayFor(model => model.Description)</em></p>
                                 </blockquote>
                                 <p class="price">@Html.DisplayFor(model => model.Price)</p>
-                                <p class="text-center buttons addToCart">
-                                    @using (Html.BeginForm("AddToCart", "MovieTitles", new { movieID = Model.MovieID }, FormMethod.Post))
-                                    {
-                                        @Html.HiddenFor(x => x.MovieID)
+                                <div class="text-center">
+                                    <p class="text-center buttons addToCart">
+                                        @using (Html.BeginForm("AddToCart", "MovieTitles", new { movieID = Model.MovieID }, FormMethod.Post))
+                                        {
+                                            @Html.HiddenFor(x => x.MovieID)
 
-                                        @Html.TextBox("Qty", 1, new { @class = "form-control text-center", style = "max-width:75px;display:inline;" })
-                                        <input type="submit" value="Add to Cart" class="btn btn-primary" name="qty" />
-                                    }
-                                </p>
-                                <hr />
-                                <p class="text-center"><a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Go to Cart</a></p>
+                                            @Html.TextBox("Qty", 1, new { @class = "form-control text-center", style = "max-width:75px;display:inline;" })
+                                            <input type="submit" value="Add to Cart" class="btn btn-primary" name="qty" />
+                                        }
+                                    </p>
+                                </div>
+                                @*<hr />
+                                <p class="text-center"><a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-info"><i class="fa fa-shopping-cart"></i> Go to Cart</a></p>*@
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <hr />
+                                    <p class="text-center"><a href="@Url.Action("Edit", new { id = Model.MovieID })" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Edit</a></p>
+                                    <p class="text-center"><a href="@Url.Action("Delete", new { id = Model.MovieID })" class="btn btn-danger"><i class="fa fa-shopping-cart"></i> Delete</a></p>
+                                }
                             </div>
                         </div>
                     </div>
                     <div id="details" class="box">
-                        <h4>About This Film</h4>
-                        <blockquote>
-                            <p><em>@Html.DisplayFor(model => model.Description)</em></p>
-                        </blockquote>
+                        <h4 class="text-center">About This Film</h4>
                         <hr />
                         <ul>
                             <li><b>Format:</b> @Html.DisplayFor(model => model.Category.Category1)</li>
@@ -109,11 +114,6 @@
                             <br />
                             <li><b>Aspect Ratio:</b> @Html.DisplayFor(model => model.AspectRatio.AspectRatio1)</li>
                         </ul>
-                        <hr>
-                        <div class="social">
-                            <h4>Share with your friends</h4>
-                            <p><a href="#" class="external facebook"><i class="fa fa-facebook"></i></a><a href="#" class="external gplus"><i class="fa fa-google-plus"></i></a><a href="#" class="external twitter"><i class="fa fa-twitter"></i></a><a href="#" class="email"><i class="fa fa-envelope"></i></a></p>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -7,19 +7,19 @@
     <div id="content">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-10">
                     <!-- breadcrumb-->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li aria-current="page" class="breadcrumb-item active">New account / Sign in</li>
+                            <li aria-current="page" class="breadcrumb-item active">New account</li>
                         </ol>
                     </nav>
                 </div>
-                <div class="col-lg-6">
+                <br />
+                <div class="col-lg-10">
                     <div class="box">
-                        <h1>New account</h1>
-                        <p class="lead">Need to register?</p>
+                        <h1>Register</h1>
                         <p>Register now and receive exclusive discounts and news on movies every week!</p>
                         <hr>
                         @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -65,39 +65,6 @@
                             </div>
                         }
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="box">
-                        <h1>Login</h1>
-                        <p class="lead">Already our customer?</p>
-                        <hr>
-                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <h4>Use a local account to log in.</h4>
-                            <hr />
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Log in" class="btn btn-primary" />
-                                </div>
-                            </div>
-                        }
-                        </div>
                 </div>
             </div>
         </div>

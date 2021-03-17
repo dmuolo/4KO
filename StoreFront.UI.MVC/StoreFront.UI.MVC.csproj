@@ -174,6 +174,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActorsController.cs" />
+    <Compile Include="Controllers\DirectorsController.cs" />
     <Compile Include="Controllers\FiltersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -195,12 +197,13 @@
     <Compile Include="Utilities\ImageService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\img\BluRay.jpg" />
     <Content Include="Content\img\DVDs.jpg" />
+    <Content Include="Content\img\BluRay.jpg" />
     <Content Include="Content\img\ProductImages\NoImage.png" />
     <Content Include="Content\img\SliderBanner.png" />
     <Content Include="Content\img\4ko Logo.png" />
     <Content Include="Content\img\delphi.jpg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -274,6 +277,16 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\EmailConfirmation.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Actors\Create.cshtml" />
+    <Content Include="Views\Actors\Delete.cshtml" />
+    <Content Include="Views\Actors\Details.cshtml" />
+    <Content Include="Views\Actors\Edit.cshtml" />
+    <Content Include="Views\Actors\Index.cshtml" />
+    <Content Include="Views\Directors\Create.cshtml" />
+    <Content Include="Views\Directors\Delete.cshtml" />
+    <Content Include="Views\Directors\Details.cshtml" />
+    <Content Include="Views\Directors\Edit.cshtml" />
+    <Content Include="Views\Directors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

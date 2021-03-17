@@ -29,161 +29,127 @@
                             <h3 class="h4 card-title">Genre</h3>
                         </div>
                         <div class="card-body">
+                            @{
+                                StoreFront.DATA.EF.MovieStoreEntities db = new StoreFront.DATA.EF.MovieStoreEntities();
+                                var genres = db.Genres.OrderBy(item => item.GenreName).ToList();
+                            }
+
                             <ul class="nav nav-pills flex-column category-menu">
-                                <li>
-                                    <ul class="list-unstyled">
-                                        <li><a href="@Url.Action("Category", "MovieTitles")" class="nav-link">Action</a></li>
-                                        <li><a href="@Url.Action("Category", "MovieTitles")" class="nav-link">Animation</a></li>
-                                        <li><a href="@Url.Action("Category", "MovieTitles")" class="nav-link">Comedy</a></li>
-                                        <li><a href="@Url.Action("Category", "MovieTitles")" class="nav-link">Drama</a></li>
-                                        <li><a href="@Url.Action("Category", "MovieTitles")" class="nav-link">Horror</a></li>
-                                        <li><a href="@Url.Action("Category", "MovieTitles")" class="nav-link">Romance</a></li>
-                                        <li><a href="@Url.Action("Category", "MovieTitles")" class="nav-link">Thriller</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card sidebar-menu mb-4">
-                        <div class="card-header">
-                            <h3 class="h4 card-title">Format <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <input type="checkbox"> 4K
-                                        <label>
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Blu Ray
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> DVD
-                                        </label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="card sidebar-menu mb-4">
-                        <div class="card-header">
-                            <h3 class="h4 card-title">Rating <a href="#" class="btn btn-sm btn-danger pull-right"><i class="fa fa-times-circle"></i> Clear</a></h3>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="colour white"></span> G
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="colour blue"></span> PG
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="colour green"></span>  PG-13
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"><span class="colour yellow"></span>  R
-                                        </label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-default btn-sm btn-primary"><i class="fa fa-pencil"></i> Apply</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="banner"><img src="~/Content/img/SliderBanner.png" alt="Logo Banner" class="img-fluid bannerPhoto"></div>
-                    <!-- *** MENUS AND FILTERS END ***-->
-                </div>
-                <div class="col-lg-9">
-                    <div class="box info-bar">
-                        <div class="row">
-                            <div class="col-md-12 col-lg-4 products-showing">Showing <strong>@Model.Count</strong> of <strong>@Model.TotalItemCount</strong> movies</div>
-                        </div>
-                    </div>
-                    <div class="row products">
-                        @*  *@
-                        @foreach (var item in Model)
-                        {
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front"><a href="@Url.Action("Details", new { id = item.MovieID } )"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
-                                            <div class="back"><a href="@Url.Action("Details", new { id = item.MovieID } )"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
-                                        </div>
-                                    </div><a href="@Url.Action("Details", new { id = item.MovieID } )" class="invisible"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a>
-                                    <div class="text">
-                                        <h3><a href="@Url.Action("Details", new { id = item.MovieID } )">@Html.DisplayFor(modelItem => item.MovieTitle1)</a></h3>
-                                        <p class="price">
-                                            <del></del>@Html.DisplayFor(modelItem => item.Price)
-                                        </p>
-                                        <p class="buttons"><a href="@Url.Action("Details", new { id = item.MovieID } )" class="btn btn-outline-secondary">View detail</a><a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a></p>
-                                    </div>
-                                    @if (item.Price <= 7.99m)
-                                    {
-                                        <div class="ribbon sale">
-                                            <div class="theribbon">Low Price</div>
-                                            <div class="ribbon-background"></div>
-                                        </div>
-                                    }
-                                    <!-- /.ribbon-->
-                                    @if (item.ReleaseYear > 2019)
-                                    {
-                                        <div class="ribbon new">
-                                            <div class="theribbon">NEW</div>
-                                            <div class="ribbon-background"></div>
-                                        </div>
-                                    }
-                                    @*<p class="text-center buttons">
-            @using (Html.BeginForm("AddToCart", "MovieTitles", new { movieID = Model.MovieID }, FormMethod.Post))
-            {
-                @Html.HiddenFor(x => x.MovieID)
-
-                @Html.TextBox("Qty", 1, new { @class = "form-control text-center", style = "max-width:75px;display:inline;" })
-                <input type="submit" value="Add to Cart" class="btn btn-primary" name="qty" />
-            }
-        </p>*@
-                                    <!-- /.text-->
-                                </div>
-                                <!-- /.product            -->
-                            </div>
+                                @foreach (var genre in genres)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "MovieTitles", new { genreid = genre.GenreID })" class="nav-link class=@if (ViewBag.GenreID == genre.GenreID)
+                            {
+                            @Html.Encode(Html.Raw("<html> active </html>"));
                         }
-                    </div>
-
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))
-
-                    @*
-                            <div class="pages">
-                            <p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
-                            <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                                <ul class="pagination">
-                                    <li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
-                                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                                    <li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    *@
-                </div>
-                <!-- /.col-lg-9-->
+                        ">@genre.GenreName</a>
+                    </li>
+                    }
+                </ul>
             </div>
         </div>
+        <div class="card sidebar-menu mb-4">
+            <div class="card-header">
+                <h3 class="h4 card-title">Format</h3>
+            </div>
+            <div class="card-body">
+                @{
+                    var cats = db.Categories.OrderBy(item => item.Category1).ToList();
+                }
+
+                <ul class="nav nav-pills flex-column category-menu">
+                    @foreach (var cat in cats)
+                    {
+                        <li>
+                            <a href="@Url.Action("Index", "MovieTitles", new { catid = cat.CategoryID })" class="nav-link class=@if (ViewBag.CategoryID == cat.CategoryID)
+                            {
+                            @Html.Encode(Html.Raw("<html> active </html>"));
+                        }
+                        ">@cat.Category1</a>
+                    </li>
+                }
+            </div>
+        </div>
+        <div class="banner"><img src="~/Content/img/SliderBanner.png" alt="Logo Banner" class="img-fluid bannerPhoto"></div>
+        <!-- *** MENUS AND FILTERS END ***-->
     </div>
+    <div class="col-lg-9">
+        <div class="box info-bar">
+            <div class="row">
+                <div class="col-md-12 col-lg-4 products-showing">Showing <strong>@Model.Count</strong> of <strong>@Model.TotalItemCount</strong> movies</div>
+            </div>
+        </div>
+        <div class="row products">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front"><a href="@Url.Action("Details", new { id = item.MovieID } )"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
+                                <div class="back"><a href="@Url.Action("Details", new { id = item.MovieID } )"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a></div>
+                            </div>
+                        </div><a href="@Url.Action("Details", new { id = item.MovieID } )" class="invisible"><img src="~/Content/img/ProductImages/@item.Image" alt="" class="img-fluid"></a>
+                        <div class="text">
+                            <h3><a href="@Url.Action("Details", new { id = item.MovieID } )">@Html.DisplayFor(modelItem => item.MovieTitle1) (@Html.DisplayFor(modelItem => item.Category.Category1))</a></h3>
+                            <p class="price">
+                                <del></del>@Html.DisplayFor(modelItem => item.Price)
+                            </p>
+                            <p class="buttons"><a href="@Url.Action("Details", new { id = item.MovieID } )" class="btn btn-outline-secondary">View detail</a>@*<a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>*@</p>
+                        </div>
+                        @if (item.Price <= 7.99m)
+                        {
+                            <div class="ribbon sale">
+                                <div class="theribbon">Low Price</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                        }
+                        <!-- /.ribbon-->
+                        @if (item.ReleaseYear > 2019)
+                        {
+                            <div class="ribbon new">
+                                <div class="theribbon">NEW</div>
+                                <div class="ribbon-background"></div>
+                            </div>
+                        }
+                        @*<p class="text-center buttons">
+                                @using (Html.BeginForm("AddToCart", "MovieTitles", new { movieID = Model.MovieID }, FormMethod.Post))
+                                {
+                                    @Html.HiddenFor(x => x.MovieID)
+
+                                    @Html.TextBox("Qty", 1, new { @class = "form-control text-center", style = "max-width:75px;display:inline;" })
+                                    <input type="submit" value="Add to Cart" class="btn btn-primary" name="qty" />
+                                }
+                            </p>*@
+                        <!-- /.text-->
+                    </div>
+                    <!-- /.product            -->
+                </div>
+            }
+        </div>
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))
+
+        @*
+                <div class="pages">
+                <p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
+                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                    <ul class="pagination">
+                        <li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                        <li class="page-item"><a href="#" class="page-link">3</a></li>
+                        <li class="page-item"><a href="#" class="page-link">4</a></li>
+                        <li class="page-item"><a href="#" class="page-link">5</a></li>
+                        <li class="page-item"><a href="#" aria-label="Next" class="page-link"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        *@
+    </div>
+    <!-- /.col-lg-9-->
+</div>
+</div>
+</div>
 </div>

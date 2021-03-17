@@ -32,3 +32,9 @@ div.box p.addToCart {
 .fa-trash-o {
     padding-left: 1.3em;
 }
+
+.addToCart {
+    padding-left: 2em;
+    margin-left: 2em;
+    border-right: 2em;
+}

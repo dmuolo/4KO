@@ -1,36 +1,55 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Manage";
 }
 
-<h2>Index</h2>
+<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- breadcrumb-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li aria-current="page" class="breadcrumb-item active">Roles Index</li>
+                        </ol>
+                    </nav>
+                    <div id="error-page" class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="box text-center py-5">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>
+                                        </th>
+                                    </tr>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

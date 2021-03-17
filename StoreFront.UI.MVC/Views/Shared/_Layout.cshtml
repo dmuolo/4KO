@@ -44,35 +44,9 @@
                     <div class="col-lg-6 offer mb-3 mb-lg-0"></div>
                     <div class="col-lg-6 text-center text-lg-right">
                         <ul class="menu list-inline mb-0">
-                            <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                            <li class="list-inline-item"><a href="@Url.Action("Register", "Account")">Register</a></li>
+                            @Html.Partial("_LoginPartial")
                             <li class="list-inline-item"><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-            <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Customer login</h5>
-                            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="@Url.Action("CustomerOrders", "Home")" method="post">
-                                <div class="form-group">
-                                    <input id="email-modal" type="text" placeholder="email" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <input id="password-modal" type="password" placeholder="password" class="form-control">
-                                </div>
-                                <p class="text-center">
-                                    <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>
-                                </p>
-                            </form>
-                            <p class="text-center text-muted">Not registered yet?</p>
-                            <p class="text-center text-muted"><a href="@Url.Action("Register", "Account")"><strong>Register now</strong></a>Get access to special discounts and more!</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -103,6 +77,55 @@
                         }
                         ">Shop</a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li id="shopNav" class="nav-item dropdown menu-large">
+                                <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link @if (ViewBag.Title != "4KO" && ViewBag.Title != "Shop" && ViewBag.Title != "Account" && ViewBag.Title != "Details" && ViewBag.Title != "Contact")
+                            {
+                            @Html.Encode(Html.Raw("<html> active </html>"));
+                            }
+                        ">Manage<b class="caret"></b></a>
+                                <ul class="dropdown-menu megamenu">
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-3">
+                                                <h5>Actor</h5>
+                                                <ul class="list-unstyled mb-3">
+                                                    <li class="nav-item"><a href="@Url.Action("Index", "Actors")" class="nav-link">See Actors Index</a></li>
+                                                    <li class="nav-item"><a href="@Url.Action("Create", "Actors")" class="nav-link">Create</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3">
+                                                <h5>Director</h5>
+                                                <ul class="list-unstyled mb-3">
+                                                    <li class="nav-item"><a href="@Url.Action("Index", "Directors")" class="nav-link">See Director Index</a></li>
+                                                    <li class="nav-item"><a href="@Url.Action("Create", "Directors")" class="nav-link">Create</a></li>
+                                                </ul>
+                                                @*<h5>Genre</h5>
+                                                    <ul class="list-unstyled mb-3">
+                                                        <li class="nav-item"><a href="@Url.Action("Index", "Genre")" class="nav-link">See Genres Index</a></li>
+                                                        <li class="nav-item"><a href="@Url.Action("Create", "Genre")" class="nav-link">Create</a></li>
+                                                    </ul>*@
+                                            </div>
+                                            <div class="col-md-6 col-lg-3">
+                                                <h5>Movies</h5>
+                                                <ul class="list-unstyled mb-3">
+                                                    <li class="nav-item"><a href="@Url.Action("Create", "MovieTitles")" class="nav-link">Create</a></li>
+                                                    <li class="nav-item"><a href="@Url.Action("Index", "MovieTitles")" class="nav-link">See Movies Index</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6 col-lg-3">
+                                                <h5>Roles</h5>
+                                                <ul class="list-unstyled mb-3">
+                                                    <li class="nav-item"><a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">See Roles Index</a></li>
+                                                    <li class="nav-item"><a href="@Url.Action("Create", "RolesAdmin")" class="nav-link">Create</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                     <div class="navbar-buttons d-flex justify-content-end">
                         <!-- /.nav-collapse-->
@@ -158,9 +181,6 @@
                                     @Html.ActionLink("Reset", "Index", "MovieTitles", null, new { @class = "btn" })
                                 </div>
                             }
-                            @*<div class="input-group-append">
-                                <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                            </div>*@
                         </div>
                     </form>
                 }
@@ -176,25 +196,19 @@
     -->
     <div id="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
+            <div class="row text-center">
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="mb-3">User section</h4>
+                    <ul class="list-unstyled">
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 text-center">
                     <h4 class="mb-3">Pages</h4>
                     <ul class="list-unstyled">
                         <li><a href="@Url.Action("Contact", "Home")">Contact us</a></li>
                     </ul>
-                    <hr>
-                    <h4 class="mb-3">User section</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                        <li><a href="@Url.Action("Register", "Account")">Regiter</a></li>
-                    </ul>
                 </div>
-                <!-- /.col-lg-3-->
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="mb-3">Stay in touch</h4>
-                    <p class="social"><a href="#" class="facebook external"><i class="fa fa-facebook"></i></a><a href="#" class="twitter external"><i class="fa fa-twitter"></i></a><a href="#" class="instagram external"><i class="fa fa-instagram"></i></a><a href="#" class="gplus external"><i class="fa fa-google-plus"></i></a><a href="#" class="email external"><i class="fa fa-envelope"></i></a></p>
-                </div>
-                <!-- /.col-lg-3-->
             </div>
             <!-- /.row-->
         </div>

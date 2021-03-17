@@ -1,0 +1,99 @@
+﻿@model StoreFront.DATA.EF.Director
+
+@{
+    ViewBag.Title = "Delete Director";
+}
+
+<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- breadcrumb-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li aria-current="page" class="breadcrumb-item">@ViewBag.Title</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div id="blog-post" class="col-lg-9 text-center">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="box text-center">
+                            <div class="text-center" id="post-content">
+                                <h3 style="color: red;">Are you sure you want to delete "@Model.FullName" from Directors?</h3>
+                                <div>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.FirstName)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.FirstName)
+                                        </dd>
+
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.LastName)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.LastName)
+                                        </dd>
+
+                                    </dl>
+
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-actions no-color">
+                                            <input type="submit" value="Delete" class="btn btn-danger" />
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- /.box-->
+                </div>
+                <!-- /#blog-post-->
+                <div class="col-lg-3">
+                    <!--
+                    *** BLOG MENU ***
+                    _________________________________________________________
+                    -->
+                    <div class="card sidebar-menu mb-4">
+                        <div class="card-header">
+                            <h3 class="h4 panel-title">Manage Directors</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav flex-column nav-pills">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Create", "Directors")" class="nav-link class=@if (ViewBag.Title == "Create Director")
+                            {
+                            @Html.Encode(Html.Raw("<html> active </html>"));
+                        }">Create</a>
+                                    </li>
+                                }
+                                <li>
+                                    <a href="@Url.Action("Index", "Directors")" class="nav-link">Back to Directors</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-3-->
+                    <!-- *** BLOG MENU END ***-->
+                    <div class="banner"><img src="~/Content/img/SliderBanner.png" alt="Logo Banner" class="img-fluid bannerPhoto"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

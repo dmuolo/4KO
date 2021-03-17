@@ -130,7 +130,7 @@ namespace StoreFront.DATA.EF
 
     public partial class Director
     {
-        [Display(Name = "Actor")]
+        [Display(Name = "Director")]
         public string FullName
         {
             get { return FirstName + " " + LastName; }
