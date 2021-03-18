@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\student\Documents\Visual Studio 2017\Projects\StoreFront\StoreFront.DATA.EF\MovieStoreModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\student\OneDrive - Living Faith Bible Institute\Desktop\StoreFront\StoreFront.DATA.EF\MovieStoreModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -30,6 +30,7 @@
         <AssociationConnector Association="MovieStoreModel.FK_MovieActor_MovieTitle" ManuallyRouted="false" />
         <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_MovieRating" ManuallyRouted="false" />
         <AssociationConnector Association="MovieStoreModel.FK_MovieTitle_MovieStatus" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MovieStoreModel.UserDetail" Width="1.5" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -15,27 +15,14 @@ namespace StoreFront.DATA.EF
 using System;
     using System.Collections.Generic;
     
-public partial class Department
+public partial class UserDetail
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Department()
-    {
+    public string UserId { get; set; }
 
-        this.Employees = new HashSet<Employee>();
+    public string FirstName { get; set; }
 
-    }
-
-
-    public int DepartmentID { get; set; }
-
-    public string Department1 { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Employee> Employees { get; set; }
+    public string LastName { get; set; }
 
 }
 
