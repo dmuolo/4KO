@@ -199,6 +199,7 @@
   <ItemGroup>
     <Content Include="Content\img\DVDs.jpg" />
     <Content Include="Content\img\BluRay.jpg" />
+    <Content Include="Content\img\Error.jpg" />
     <Content Include="Content\img\ProductImages\NoImage.png" />
     <Content Include="Content\img\SliderBanner.png" />
     <Content Include="Content\img\4ko Logo.png" />
@@ -287,6 +288,7 @@
     <Content Include="Views\Directors\Details.cshtml" />
     <Content Include="Views\Directors\Edit.cshtml" />
     <Content Include="Views\Directors\Index.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

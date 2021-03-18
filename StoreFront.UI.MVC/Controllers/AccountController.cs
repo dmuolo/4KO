@@ -155,14 +155,14 @@ namespace StoreFront.UI.MVC.Controllers
                 if (result.Succeeded)
                 {
                     #region Custom User Details
-                    //UserDetail newUserDetail = new UserDetail();
-                    //newUserDetail.UserID = userId;
-                    //newUserDetail.FirstName = model.FirstName;
-                    //newUserDetail.LastName = model.LastName;
+                    UserDetail newUserDetail = new UserDetail();
+                    newUserDetail.UserId = user.Id;
+                    newUserDetail.FirstName = model.FirstName;
+                    newUserDetail.LastName = model.LastName;
 
-                    //MovieStoreEntities db = new MovieStoreEntities();
-                    //db.UserDetails.Add(newUserDetail);
-                    //db.SaveChanges();
+                    MovieStoreEntities db = new MovieStoreEntities();
+                    db.UserDetails.Add(newUserDetail);
+                    db.SaveChanges();
 
                     UserManager.AddToRole(user.Id, "Customer");
                     #endregion
