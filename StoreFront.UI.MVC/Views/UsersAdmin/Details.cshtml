@@ -1,45 +1,81 @@
 ﻿@model StoreFront.UI.MVC.Models.ApplicationUser
-
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Details";
 }
 
-<h2>Details.</h2>
-
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-    </dl>
+<div id="all">
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- breadcrumb-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li aria-current="page" class="breadcrumb-item">@ViewBag.Title</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div id="blog-post" class="col-lg-9">
+                    <div class="box text-center">
+                        <h1>@ViewBag.Title</h1>
+                        <hr />
+                        <div id="post-content text-center">
+                            <div>
+                                <h4>List of roles for user @Model.Email:</h4>
+                                @if (ViewBag.RoleNames.Count == 0)
+                                {
+                                    <hr />
+                                    <p>No roles found for this user.</p>
+                                }
+                                <table class="table">
+                                    @foreach (var item in ViewBag.RoleNames)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success" })
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /.box-->
+                </div>
+                <!-- /#blog-post-->
+                <div class="col-lg-3">
+                    <!--
+                    *** BLOG MENU ***
+                    _________________________________________________________
+                    -->
+                    <div class="card sidebar-menu mb-4">
+                        <div class="card-header">
+                            <h3 class="h4 panel-title">Manage Users</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav flex-column nav-pills">
+                                <li>
+                                    <a href="@Url.Action("Create", "UsersAdmin")" class="nav-link">Create</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "UsersAdmin")" class="nav-link">Back to Users</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-3-->
+                    <!-- *** BLOG MENU END ***-->
+                    <div class="banner"><img src="~/Content/img/SliderBanner.png" alt="Logo Banner" class="img-fluid bannerPhoto"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<h4>List of roles for this user</h4>
-@if (ViewBag.RoleNames.Count == 0)
-{
-    <hr />
-    <p>No roles found for this user.</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
-
-<table class="table">
-
-    @foreach (var item in ViewBag.RoleNames)
-    {
-        <tr>
-            <td>
-                @item
-            </td>
-        </tr>
-    }
-</table>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
-
-
