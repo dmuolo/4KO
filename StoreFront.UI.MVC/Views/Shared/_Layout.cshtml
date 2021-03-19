@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     @Styles.Render("~/bundles/css")
+    <!--jQueryUI STYLE-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <!-- Google fonts - Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
     <!-- Favicon-->
@@ -33,6 +35,9 @@
                             @Html.Partial("_LoginPartial")
                             <li class="list-inline-item"><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                         </ul>
+                        <div id="MessageDisplay">
+                            <div class="col-md-10 col-md-offset-1" id="MessageContent"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,23 +57,23 @@
                             <a href="@Url.Action("Index", "Home")" class="nav-link class=@if (ViewBag.Title == "4KO")
                             {
                             @Html.Encode(Html.Raw("<html> active </html>"));
-                        }
+                            }
                         ">Home</a>
                         </li>
                         <li id="shopNav" class="nav-item dropdown menu-large">
                             <a href="@Url.Action("Index", "MovieTitles")" class="nav-link class=@if (ViewBag.Title == "Shop")
                             {
                             @Html.Encode(Html.Raw("<html> active </html>"));
-                        }
+                            }
                         ">Shop</a>
                         </li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li id="shopNav" class="nav-item dropdown menu-large">
                                 <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link @if (ViewBag.Title != "4KO" && ViewBag.Title != "Shop" && ViewBag.Title != "Account" && ViewBag.Title != "Details" && ViewBag.Title != "Contact")
-                            {
+                                {
                             @Html.Encode(Html.Raw("<html> active </html>"));
-                            }
+                                }
                         ">Manage<b class="caret"></b></a>
                                 <ul class="dropdown-menu megamenu">
                                     <li>
@@ -138,19 +143,16 @@
                 {
                     <form role="search" class="ml-auto">
                         <div class="input-group">
-                            @using (Html.BeginForm("Index", "MovieTitles", FormMethod.Get))
-                            {
-                                <div class="col-md-6">
-                                    @Html.TextBox("SearchString", ViewBag.SearchString as string, new { @placeholder = "Search by Title", @class = "form-control" })
-                                </div>
-                                <div class="col-md-2 text-center">
-                                    <input type="submit" value="See Results" class="btn btn-primary" />
-                                </div>
-                                <div class="col-md-1"></div>
-                                <div class="col-md-2">
-                                    @Html.ActionLink("Reset", "Index", "MovieTitles", null, new { @class = "btn" })
-                                </div>
-                            }
+                            <div class="col-md-6">
+                                @Html.TextBox("SearchString", ViewBag.SearchString as string, new { @placeholder = "Search by Title", @class = "form-control" })
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <input type="submit" value="See Results" class="btn btn-primary" />
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                @Html.ActionLink("Reset", "Index", "MovieTitles", null, new { @class = "btn" })
+                            </div>
                         </div>
                     </form>
                 }
@@ -216,6 +218,10 @@
     <!-- *** COPYRIGHT END ***-->
     <!-- JavaScript files-->
     @Scripts.Render("~/bundles/js")
+    <!--jQueryUI script-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!--Ajax Script-->
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

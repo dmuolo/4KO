@@ -77,36 +77,40 @@
                             <div class="col-md-12 col-lg-4 products-showing">
                                 <p>
                                     Showing <strong>
-                                        @{
-                                            if (Model.PageNumber == 1)
-                                            {
-                                                @Html.Encode(Html.Raw("1-"));
-                                            }
-                                            else if (Model.PageNumber == 2)
-                                            {
-                                                @Html.Encode(Html.Raw("7-"));
-                                            }
-                                            else if (Model.Count < 6)
-                                            {
-                                                int finalCount = ((Model.PageNumber * 6) - Model.Count - 1);
-                                                @Html.Encode(Html.Raw($"{finalCount}"));
-                                            }
-                                            else
-                                            {
-                                                int lowCount = (((Model.PageNumber * 6) - 5));
-                                                @Html.Encode(Html.Raw($"{lowCount}" + "-"));
-                                            }
-                                            if (Model.Count == 6)
-                                            {
-                                                int highCount = (Model.PageNumber * Model.Count);
-                                                @Html.Encode(Html.Raw($"{highCount}"));
-                                            }
-                                            else
-                                            {
-                                                @Html.Encode(Html.Raw($"-" + $"{Model.TotalItemCount}"));
-                                            }
-                                        }
-                                    </strong> of<strong> @Model.TotalItemCount</strong> movies
+    @{
+        if (Model.Count < 6 && Model.PageNumber == 1)
+        {
+            @Html.Encode(Html.Raw(""));
+        }
+        else if (Model.PageNumber == 2)
+        {
+            @Html.Encode(Html.Raw("7-"));
+        }
+        else if (Model.Count < 6)
+        {
+            int finalCount = ((Model.PageNumber * 6) - Model.Count - 1);
+            @Html.Encode(Html.Raw($"{finalCount}"));
+        }
+        else if (Model.PageNumber == 1)
+        {
+            @Html.Encode(Html.Raw("1-"));
+        }
+        else
+        {
+            int lowCount = (((Model.PageNumber * 6) - 5));
+            @Html.Encode(Html.Raw($"{lowCount}" + "-"));
+        }
+        if (Model.Count == 6)
+        {
+            int highCount = (Model.PageNumber * Model.Count);
+            @Html.Encode(Html.Raw($"{highCount}"));
+        }
+        else
+        {
+            @Html.Encode(Html.Raw($"-" + $"{Model.TotalItemCount}"));
+        }
+    }
+</strong> of<strong> @Model.TotalItemCount</strong> movies
                                 </p>
                             </div>
                         </div>
