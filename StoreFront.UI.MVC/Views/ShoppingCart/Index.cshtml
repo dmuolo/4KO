@@ -5,7 +5,6 @@
     decimal? cartTotal = 0;
     int totalCountOfItems = 0;
 }
-
 <div id="all">
     <div id="content">
         <div class="container">
@@ -20,26 +19,22 @@
                         </ol>
                     </nav>
                 </div>
-
                 <div id="basket" class="col-lg-9">
                     <div class="box">
-                        <form method="post" action="#">
-                            <h1>Shopping cart</h1>
-                            <p class="text-muted">You currently have @Model.Count @(Model.Count > 1 || Model.Count  == 0 ? "movies" : "movie") in your cart.</p>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">Product</th>
-                                            <th class="update">Quantity</th>
-                                            <th>Unit price</th>
-                                            <th colspan="2">Total</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
+                        <h1>Shopping cart</h1>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Product</th>
+                                        <th class="update">Quantity</th>
+                                        <th>Unit price</th>
+                                        <th colspan="2">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
                                         <tr>
                                             <td><a href="@Url.Action("Details", "MovieTitles", new { id = item.Value.Product.MovieID })"><img src="~/Content/img/ProductImages/t_@item.Value.Product.Image" alt="@item.Value.Product.MovieTitle1 Image"></a></td>
                                             <td style="font-size: 0.9em;"><a href="@Url.Action("Details", "MovieTitles", new { id = item.Value.Product.MovieID })">@item.Value.Product.MovieTitle1</a></td>
@@ -51,30 +46,30 @@
                                                     @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width: 80px;display:inline-block; " })
                                                     <input type="submit" value="Update" class="btn btn-primary update" style="max-width:150px;" />
                                                 }
-                                                @{totalCountOfItems += item.Value.Qty;}
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Value.Product.Price)
-                                                </td>
-                                                <td>
-                                                    @{
-                                                        decimal? lineTotal = item.Value.Product.Price * item.Value.Qty;
-                                                        cartTotal += lineTotal;
-                                                    }
-                                                    @string.Format($"{lineTotal:c}")
-                                                </td>
-                                                <td><i class="fa fa-trash-o"> @Html.ActionLink("Remove", "RemoveFromCart", new { id = item.Value.Product.MovieID })<br /></i></td>
-                                            </tr>
-                                        }
-                                </table>
+                                            </td>
+                                            @{totalCountOfItems += item.Value.Qty;}
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Value.Product.Price)
+                                            </td>
+                                            <td>
+                                                @{
+                                                    decimal? lineTotal = item.Value.Product.Price * item.Value.Qty;
+                                                    cartTotal += lineTotal;
+                                                }
+                                                @string.Format($"{lineTotal:c}")
+                                            </td>
+                                            <td><i class="fa fa-trash-o"> @Html.ActionLink("Remove", "RemoveFromCart", new { id = item.Value.Product.MovieID })<br /></i></td>
+                                        </tr>
+                                    }
+                            </table>
+                        </div>
+                        <!-- /.table-responsive-->
+                        <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
+                            <div class="left"><a href="@Url.Action("Index", "MovieTitles")" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Continue shopping</a></div>
+                            <div class="right">
+                                <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i></button>
                             </div>
-                            <!-- /.table-responsive-->
-                            <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
-                                <div class="left"><a href="@Url.Action("Index", "MovieTitles")" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i> Continue shopping</a></div>
-                                <div class="right">
-                                    <button type="submit" class="btn btn-primary">Proceed to checkout <i class="fa fa-chevron-right"></i></button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                     <!-- /.box-->
                 </div>
