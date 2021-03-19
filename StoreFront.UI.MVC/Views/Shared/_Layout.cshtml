@@ -94,13 +94,6 @@
                                                     <li class="nav-item"><a href="@Url.Action("Index", "MovieTitles")" class="nav-link">See Movies Index</a></li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-6 col-lg-3">
-                                                <h5>Roles</h5>
-                                                <ul class="list-unstyled mb-3">
-                                                    <li class="nav-item"><a href="@Url.Action("Index", "RolesAdmin")" class="nav-link">See Roles Index</a></li>
-                                                    <li class="nav-item"><a href="@Url.Action("Create", "RolesAdmin")" class="nav-link">Create</a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                     </li>
                                 </ul>
@@ -174,13 +167,13 @@
             <div class="row text-center">
                 @if (User.IsInRole("Admin"))
                 {
-                <div class="col-lg-2 col-md-4">
-                    <h4 class="mb-3">Admin section</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="@Url.Action("Index", "UsersAdmin")">Manage Users</a></li>
-                        <li><a href="@Url.Action("Index", "RolesAdmin")">Manage Roles</a></li>
-                    </ul>
-                </div>
+                    <div class="col-lg-2 col-md-4">
+                        <h4 class="mb-3">Admin section</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="@Url.Action("Index", "UsersAdmin")">Manage Users</a></li>
+                            <li><a href="@Url.Action("Index", "RolesAdmin")">Manage Roles</a></li>
+                        </ul>
+                    </div>
                 }
                 <div class="col-lg-2 col-md-4">
                     <h4 class="mb-3">User section</h4>

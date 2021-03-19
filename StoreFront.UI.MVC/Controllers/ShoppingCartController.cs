@@ -45,7 +45,7 @@ namespace StoreFront.UI.MVC.Controllers
 
             if (shoppingCart.Count == 0)
             {
-                ViewBag.Message = "There are no books in your cart";
+                ViewBag.Message = "There are no movies in your cart";
             }
 
             return RedirectToAction("Index");

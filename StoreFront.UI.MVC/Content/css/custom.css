@@ -27,7 +27,9 @@ div.box p.addToCart {
 }
 
 .update {
-    
+    margin-left: .5em;
+    min-width: 5em;
+    border: 0em;
 }
 .fa-trash-o {
     padding-left: 1.3em;

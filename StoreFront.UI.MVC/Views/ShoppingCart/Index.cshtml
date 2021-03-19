@@ -31,13 +31,13 @@
                     <div class="box">
                         <form method="post" action="#">
                             <h1>Shopping cart</h1>
-                            <p class="text-muted">You currently have @totalCountOfItems @(totalCountOfItems > 1 || totalCountOfItems == 0 ? "movies" : "movie") in your cart.</p>
+                            <p class="text-muted">You currently have @Model.Count  @(Model.Count > 1 ? "movies" : "movie") in your cart.</p>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th colspan="2">Product</th>
-                                            <th>Quantity</th>
+                                            <th class="update">Quantity</th>
                                             <th>Unit price</th>
                                             <th colspan="2">Total</th>
                                         </tr>
@@ -46,19 +46,18 @@
                                     <tbody>
                                         @foreach (var item in Model)
                                         {
-                                            <tr>
-                                                <td><a href="#"><img src="~/Content/img/ProductImages/t_@item.Value.Product.Image" alt="@item.Value.Product.MovieTitle1 Image"></a></td>
-                                                <td><a href="@Url.Action("Details", "MovieTitles", new { id = item.Value.Product.MovieID })">@item.Value.Product.MovieTitle1</a></td>
-                                                <td class="update">
-                                                    @using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
-                                                    {
-                                                        @Html.Hidden("movieID", item.Value.Product.MovieID)
-                                                        @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width:50px;display:inline;" })
-
-                                                        <input type="submit" value="Update" class="update btn btn-primary" />
+                                        <tr>
+                                            <td><a href="#"><img src="~/Content/img/ProductImages/t_@item.Value.Product.Image" alt="@item.Value.Product.MovieTitle1 Image"></a></td>
+                                            <td style="font-size: 0.9em;"><a href="@Url.Action("Details", "MovieTitles", new { id = item.Value.Product.MovieID })">@item.Value.Product.MovieTitle1</a></td>
+                                                @using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+                                                {
+                                            <td class="update">
+                                                @Html.Hidden("movieID", item.Value.Product.MovieID)
+                                                @Html.TextBox("qty", item.Value.Qty, new { @class = "form-control", style = "max-width: 80px;display:inline-block;" })
+                                                <input style="max-width:150px;" type="submit" value="Update" class="btn btn-primary update" />
+                                            </td>
                                                     }
                                                     @{totalCountOfItems += item.Value.Qty;}
-                                                </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.Value.Product.Price)
                                                 </td>

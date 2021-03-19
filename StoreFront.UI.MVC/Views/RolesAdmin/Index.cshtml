@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
-
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Roles Index";
 }
-
 <div id="all">
     <div id="content">
         <div class="container">
@@ -12,44 +10,72 @@
                     <!-- breadcrumb-->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li aria-current="page" class="breadcrumb-item active">Roles Index</li>
+                            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li aria-current="page" class="breadcrumb-item">@ViewBag.Title</li>
                         </ol>
                     </nav>
-                    <div id="error-page" class="row">
-                        <div class="col-md-6 mx-auto">
-                            <div class="box text-center py-5">
-                                <table class="table">
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Name)
-                                        </th>
-                                        <th>
+                </div>
+                <div id="blog-post" class="col-lg-9 text-center">
+                    <div class="box text-center">
+                        <h1>@ViewBag.Title</h1>
+                        <br />
+                        <div class="text-center" id="post-content">
+                            <table class="table text-center">
+                                <tr>
+                                    <th class="text-center">
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
 
-                                        </th>
-                                    </tr>
-                                    @if (User.IsInRole("Admin"))
+                                    @foreach (var item in Model)
                                     {
-                                        foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Name)
-                                                </td>
-                                                <td>
-                                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                                </td>
-                                            </tr>
-                                        }
+                                        <tr class="text-center">
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td class="text-center">
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                            </td>
+                                        </tr>
                                     }
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
+                    <!-- /.box-->
+                </div>
+                <!-- /#blog-post-->
+                <div class="col-lg-3">
+                    <!--
+                    *** BLOG MENU ***
+                    _________________________________________________________
+                    -->
+                    <div class="card sidebar-menu mb-4">
+                        <div class="card-header">
+                            <h3 class="h4 panel-title">Manage Roles</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav flex-column nav-pills">
+                                <li>
+                                    <a href="@Url.Action("Create", "UsersAdmin")" class="nav-link class=@if (ViewBag.Title == "Create User")
+                            {
+                            @Html.Encode(Html.Raw("<html> active </html>"));
+                                        }">Create</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-3-->
+                    <!-- *** BLOG MENU END ***-->
+                    <div class="banner"><img src="~/Content/img/SliderBanner.png" alt="Logo Banner" class="img-fluid bannerPhoto"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
