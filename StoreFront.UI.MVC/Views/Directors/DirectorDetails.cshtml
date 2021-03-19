@@ -1,0 +1,28 @@
+﻿@model StoreFront.DATA.EF.Director
+
+<div>
+    @*<h4>Director</h4>*@
+    <dl class="dl-horizontal text-center">
+        <br />
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+    </dl>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DirectorID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

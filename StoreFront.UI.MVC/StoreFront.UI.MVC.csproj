@@ -289,6 +289,9 @@
     <Content Include="Views\Directors\Edit.cshtml" />
     <Content Include="Views\Directors\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Directors\AjaxCreate.cshtml" />
+    <Content Include="Views\Directors\DirectorDetails.cshtml" />
+    <Content Include="Views\Directors\DirectorEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Directors Index";
 }
+
 <div id="all">
     <div id="content">
         <div class="container">
@@ -16,9 +17,17 @@
                         </ol>
                     </nav>
                 </div>
-                <div id="blog-post" class="col-lg-9 text-center">
-                    <div class="box text-center">
-                        <h1>@ViewBag.Title</h1>
+                <div id="blog-post" class="col-lg-12">
+                    <div class="box">
+                        <h1 class="text-center">@ViewBag.Title</h1>
+                        <ul class="nav flex-column nav-pills">
+                            <li>
+                                <button id="toggleDirectorCreate" class="btn btn-primary">Create Director</button>
+                            </li>
+                        </ul>
+                        <div id="DirectorCreate">
+                            @Html.Partial("AjaxCreate", new StoreFront.DATA.EF.Director())
+                        </div>
                         <br />
                         <div class="text-center" id="post-content">
                             <table class="table">
@@ -33,7 +42,7 @@
                                 </tr>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
+                                    <tr id="@item.DirectorID">
                                         <td>
                                             @Html.DisplayFor(modelItem => item.FirstName)
                                         </td>
@@ -43,9 +52,13 @@
                                         @if (User.IsInRole("Admin"))
                                         {
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.DirectorID }) |
-                                                @Html.ActionLink("Details", "Details", new { id = item.DirectorID }) |
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.DirectorID })
+                                                <a href="" class="EditLink" id="@item.DirectorID">Edit</a> |
+                                                <a href="" class="DetailsLink" id="@item.DirectorID">Details</a> |
+                                                @Ajax.ActionLink("Delete", "AjaxDelete", "Directors", new { id = item.DirectorID }, new AjaxOptions {
+               HttpMethod = "POST",
+               Confirm = "Are you sure you want to delete " + item.FullName + " from directors?",
+               OnSuccess = "deleteConfirmed"
+           })
                                             </td>
                                         }
                                     </tr>
@@ -59,41 +72,13 @@
                     <!-- /.box-->
                 </div>
                 <!-- /#blog-post-->
-                <div class="col-lg-3">
-                    <!--
-                    *** BLOG MENU ***
-                    _________________________________________________________
-                    -->
-                    <div class="card sidebar-menu mb-4">
-                        <div class="card-header">
-                            <h3 class="h4 panel-title">Manage Directors</h3>
-                        </div>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <div class="card-body">
-                                <ul class="nav flex-column nav-pills">
-                                    <li>
-                                        <button class="btn btn-primary">Create Director</button>
-                                        <div>
-                                            @Html.Partial("DirectorCreate", new StoreFront.DATA.EF.Director())
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        }
-                    </div>
-                    <!-- /.col-lg-3-->
-                    <!-- *** BLOG MENU END ***-->
-                    <div class="banner"><img src="~/Content/img/SliderBanner.png" alt="Logo Banner" class="img-fluid bannerPhoto"></div>
-                </div>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))
             </div>
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))
         </div>
     </div>
-</div>
 
-@section scripts{
-    <script>
+    @section scripts{
+        <script>
         //deleteConfirmed()
         function deleteConfirmed(response) {
             //remove the row from the table (in html without a browser refresh)
@@ -111,7 +96,7 @@
                 //dialog box properties (you can find these at jQueryUI.com - api documentation or view the modal information)
                 modal: true,
                 open: function () {
-                    var data = $(this).data('pId');
+                    var data = $(this).data('dId');
                     $(this).load('/Directors/DirectorDetails/' + data)
                 },
                 width: 400,
@@ -126,32 +111,32 @@
         $('#DirectorCreate').hide();
         $('#toggleDirectorCreate').click(function () {
             $('#DirectorCreate').toggle(); //toggles back and forth each time it's clicked
-            //extra - change the appearance of the button based on the toggle/visibility
-            if ($('#DirectorCreate').is(':visible')) {
+                                           //extra - change the appearance of the button based on the toggle/visibility
+        if ($('#DirectorCreate').is(':visible')) {
                 $('#toggleDirectorCreate').html('Cancel');
-                $('#toggleDirectorCreate').attr('class', "btn btn-danger");
-            }
+                $('#toggleDirectorCreate').attr('class', "btn btn-primary");
+        }
             else {
                 $('#toggleDirectorCreate').html('Create Director');
-                $('#toggleDirectorCreate').attr('class', "btn btn-primary");
-            }
-        });
+            $('#toggleDirectorCreate').attr('class', "btn btn-success");
+        }
+    });
 
         //PROCESS (or submit) THE CREATE FORM
         $('#DirectorCreateForm').submit(function (e) {
-            //serialize (package the object (our form information) for transport)
-            //this refers back to PublisherCreateForm
-            var formData = $(this).serializeArray();
-            //interrupt the normal submit event
-            e.preventDefault();
+        //serialize (package the object (our form information) for transport)
+        //this refers back to PublisherCreateForm
+        var formData = $(this).serializeArray();
+        //interrupt the normal submit event
+        e.preventDefault();
             //message the user while processing
             //$() is the DOM selector
             $('#MessageContent').html("<div class='alert alert-info'>Please wait...</div>");
 
             //call to ajax and process form
             $.ajax({
-                //action and controller to process the create
-                url: "@Url.Action("AjaxCreate", "Directors")",
+        //action and controller to process the create
+        url: "@Url.Action("AjaxCreate", "Directors")",
 
                 //type of action that we're sending it to (post)
                 type: "POST",
@@ -170,19 +155,18 @@
                     //basically adding this row to table, creating a temporary code
                     //add the (temporary) row to the table (remember: the browser is being manually updated) -- we'll see a message to refresh the view to see the links - You could code those in, but Chuck likes to leave them out to see the asynchronous activity. When view refreshed, new record will load into the table WITH the links (null pull from the db with our record added)
                     $(function () {
-                        var row = '<tr><td>' + data.DirectorName +
-                            '</td><td>' + data.City +
-                            '</td><td>' + data.State +
-                            '</td><td>Active</td><td>Refresh to view links</td></tr>';
+                    var row = '<tr><td>' + data.FirstName +
+                        '</td><td>' + data.LastName +
+                        '</td><td>Refresh to view links</td></tr>';
                         //still need to add that row to the table
-                        $('#PublishersTable').append(row);
+                        $('#DirectorsTable').append(row);
 
                         //close form and show create button again
                         $('#DirectorCreate').toggle();//closes form
                         $('#toggleDirectorCreate').html('Create Director');//changes text back to create publisher
                         $('#toggleDirectorCreate').attr('class', 'btn btn-primary');//changes button color to blue
-                    });
-                }, //everything in this is for success
+                });
+            }, //everything in this is for success
                 //error - show alert message in the div above the render body
                 //no dom selector
                 error: function (e) {
@@ -190,9 +174,9 @@
                         "<div class-'alert alert-warning'>There was an error." +
                         " Please try again or contact the site administrator.</div>"
                     );
-                }
-            });
+            }
         });
+    });
 
         //***********Show the Edit Dialog Box*************************
         //e reps event arguments
@@ -212,7 +196,6 @@
                 resizable: false
             });
         });
-
-    </script>
+        </script>
 
     }

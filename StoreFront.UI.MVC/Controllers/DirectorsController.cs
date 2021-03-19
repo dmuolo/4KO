@@ -82,7 +82,7 @@ namespace StoreFront.UI.MVC.Controllers
         #endregion
 
         #region AJAX Edit [GET]
-        public PartialViewResult PublisherEdit(int id)
+        public PartialViewResult DirectorEdit(int id)
         {
             //retrieve the publisher and retrun to the view with data
             //populated for updates
@@ -113,7 +113,7 @@ namespace StoreFront.UI.MVC.Controllers
         // GET: Directors
         public ActionResult Index(string searchString, int page = 1)
         {
-            int pageSize = 15;
+            int pageSize = 10;
             var dirs = db.Directors.OrderBy(m => m.LastName).ToList();
 
             if (!string.IsNullOrEmpty(searchString))
